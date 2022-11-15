@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+    body {
+      font-family: Roboto;
+      background-color: #000;
+      color: #ffc0c7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      background-color: #410f60;
+      width: 700px;
+      border: solid #000;
+      border-radius: 5%;
+      height: auto;
+    }
+
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    .registerbtn {
+      background-color: #3700b3;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      font-size: large;
+    }
+
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
+    a {
+      color: dodgerblue;
+    }
+
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <form>
+      <div class="container">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Username" name="username" id="username" required>
+        <label for="balance"><b>Balance at the beginning of the month</b></label>
+        <input type="text" placeholder="Balance" name="balance" id="balance" required>
+        <label for="tot"><b>Total of all items</b></label>
+        <input type="text" placeholder="Total of all items" name="tot" id="tot" required>
+
+        <label for="tot_credits"><b>Total Credits</b></label>
+        <input type="text" placeholder="Total of all credits" name="tot_credits" id="tot_credits" required>
+        <label for="all"><b>Allowed credit limit</b></label>
+        <input type="text" placeholder="Allowed credit limit" name="all" id="all" required>
+        <input type="button" class="registerbtn" onclick="fin()" value="Register">
+        <h2 id="find_exc"></h2>
+      </div>
+      <script>
+        function fin() {
+          var mth_cred = document.getElementById("tot_credits").value; var all_cred = document.getElementById("all").value;
+          var diff = parseInt(all_cred) - parseInt(mth_cred);
+          if (diff >= 0) {
+            document.getElementById("find_exc").innerHTML = "Credit limit has not exceeded.";
+            document.getElementById("find_exc").style.color = "#eeeeee";
+          } else {
+            document.getElementById("find_exc").innerHTML = "Credit limit has been exceeded.";
+            document.getElementById("find_exc").style.color = "ae8f00";
+          }
+        }
+      </script>
+    </form>
+  </center>
+</body>
+
+</html>
