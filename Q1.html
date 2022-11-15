@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+        body {
+            font-family: Roboto;
+        }
+
+        .passwordInput {
+            margin-top: 5%;
+            text-align: center;
+        }
+
+        #strengthDisp {
+            margin-top: 5%;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-position: inside;
+            list-style: none;
+        }
+
+        #main {
+            width: 400px;
+            height: auto;
+            border: solid 2px;
+            border-radius: 2%;
+        }
+
+        #passEntry {
+            height: 25px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div id="main">
+            <h2> Password Strength Checker</h2><br>
+            <div id="strength">
+                <p>
+                <h3>Strength (Color) </h3>
+                Green: Strong <br>
+                Blue: Good <br>
+                Orange: Moderate <br>
+                Red: Weak <br>
+                <br>
+                </ul>
+            </div>
+            <input type="password" placeholder="Type your password" id="passEntry" class="passwordInput">
+            <br><br>
+            <div id="length">
+                <h3>Length (Text) </h3>
+                Strong: more than 16 <br>
+                Good: 10 - 16 <br>
+                Moderate: 7 - 10 <br>
+                Weak: less than 7
+            </div>
+            </p>
+            <span id="strengthDisp"">Weak</span> <br>
+        </div>
+    </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let timeout;
+        let password = document.getElementById('passEntry');
+        let strengthBadge = document.getElementById('strengthDisp');
+        let strong = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\!\@\#\$\%\^\&\*\)\(\+\=\.\_\-])/;
+        let good = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/;
+        let moderate = /(?=.*[0-9])(?=.*[a-z])/;
+        ps_len = 0;
+        function StrengthChecker(PasswordParameter) {
+            let len = PasswordParameter.length;
+            ps_len = len;
+            if (len < 7) {
+                strengthBadge.textContent = 'Weak'
+            } else if (len < 10 && len >= 7) {
+                strengthBadge.textContent = 'Moderate'
+            } else if (len < 16 && len >= 10) {
+                strengthBadge.textContent = 'Good'
+            } else {
+                strengthBadge.textContent = 'Strong'
+            }
+
+            if (strong.test(PasswordParameter)) {
+                main.style.backgroundColor = "#00ff00"
+            } else if (good.test(PasswordParameter)) {
+                main.style.backgroundColor = "#add8e6"
+            }
+            else if (moderate.test(PasswordParameter)) {
+                main.style.backgroundColor = "#ffa500"
+            } else {
+                main.style.backgroundColor = "#ff0000"
+            }
+        }
+
+        password.addEventListener("input", () => {
+            strengthBadge.style.display = 'block';
+            clearTimeout(timeout);
+            timeout = setTimeout(() => StrengthChecker(password.value), 500);
+            if (password.value.length !== 0) {
+                strengthBadge.style.display != 'block'
+            } else {
+                strengthBadge.style.display = 'none'
+            }
+        });
+
+    </script>
+</body>
+
+
+</html>
